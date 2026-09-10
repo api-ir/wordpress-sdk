@@ -1,0 +1,31 @@
+<?php
+/**
+ * API.IR WordPress SDK
+ * سرویس CompanyInfo — استعلام شخص حقوقی
+ *
+ * @package  APIIR
+ * @version  1.0.0
+ * @link     https://api.ir
+ */
+
+defined('ABSPATH') || exit;
+
+require_once __DIR__ . '/../core.php';
+
+if (!function_exists('apiir_company_info')) {
+    /**
+     * استعلام شخص حقوقی
+     *
+     * دریافت اطلاعات ثبتی شخص حقوقی (شرکت، موسسه یا سازمان) با شناسه ملی.
+     *
+     * @param string $nationalID شناسه ملی شرکت
+     * @param int    $timeout    مهلت پاسخ به ثانیه؛ پیش‌فرض این سرویس ۳۰ ثانیه (استعلام سبک، از تنظیم سراسری APIIR_TIMEOUT)
+     * @return array success / code / message / data — خروجی data یک آرایه‌ی انجمنی (آبجکت) است
+     */
+    function apiir_company_info($nationalID, $timeout = APIIR_TIMEOUT)
+    {
+        return apiir_request('https://s.api.ir/api/sw1/CompanyInfo', [
+            'nationalID' => $nationalID,
+        ], $timeout);
+    }
+}
